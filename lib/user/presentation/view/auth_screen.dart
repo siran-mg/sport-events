@@ -1,63 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:sport_events/core/components/app_password_field.dart';
-import 'package:sport_events/core/components/app_text_field.dart';
-import 'package:sport_events/core/components/primary_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sport_events/core/view_model/data_state.dart';
+import 'package:sport_events/user/presentation/view/sign_in_screen.dart';
+import 'package:sport_events/user/presentation/view_model/auth_view_model.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends ConsumerWidget {
   const AuthScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authViewModel = ref.read(authViewModelProvider.notifier);
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Sport Events"),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-            ),
-            child: Column(
-              children: [
-                Text(
-                  "Connexion",
-                  style: Theme.of(context).textTheme.headlineLarge,
-                ),
-                AppTextField(
-                  emailController: emailController,
-                  label: "Email",
-                  keyboardType: TextInputType.emailAddress,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    AppPasswordField(
-                      passwordController: passwordController,
-                      label: "Mot de passe",
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Text(
-                          "Mot de passe oublié ?",
-                          style:
-                              TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                PrimaryButton(label: "Se connecter", onTap: () {}),
-              ],
-            ),
-          ),
-        ),
-      ),
+    ref.listen(authViewModelProvider, (previous, next) {
+      switch (next) {
+        case Initial():
+          print("initial");
+        case Loading():
+          print("loading");
+        case Success():
+        // TODO: Handle this case.
+        case Error():
+        // TODO: Handle this case.
+      }
+    });
+
+    return SignInScreen(
+      emailController: emailController,
+      passwordController: passwordController,
+      authViewModel: authViewModel,
     );
   }
 }

@@ -27,7 +27,7 @@ class _AppPasswordFieldState extends State<AppPasswordField> {
             });
           },
           icon:
-              Icon(_displayPassword ? Icons.visibility : Icons.visibility_off),
+              Icon(!_displayPassword ? Icons.visibility : Icons.visibility_off),
         ),
       ),
       obscureText: !_displayPassword,

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:sport_events/core/components/app_bottom_navigation_bar.dart';
 import 'package:sport_events/core/components/app_floating_action_button.dart';
+import 'package:sport_events/core/components/user_button.dart';
+import 'package:sport_events/core/theme.dart';
+import 'package:sport_events/core/typography.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,24 +19,31 @@ class MyApp extends StatelessWidget {
     var brightness =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
     bool isDarkMode = brightness == Brightness.dark;
+    final theme = MaterialTheme(textTheme);
     return MaterialApp(
       title: 'Sport Events',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      theme: theme.light(),
       home: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Sport Events"),
-          ),
+          appBar: buildAppBar(),
           bottomNavigationBar: const AppButtonNavigationBar(),
           floatingActionButton: const AppFloatingActionButton(),
           body: Container(),
         ),
       ),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      title: const Text("Sport Events"),
+      actions: const [
+        UserButton(),
+        SizedBox(
+          width: 8,
+        )
+      ],
     );
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sport_events/core/components/app_password_field.dart';
-import 'package:sport_events/core/components/app_text_field.dart';
-import 'package:sport_events/core/components/error_popup.dart';
-import 'package:sport_events/core/components/primary_button.dart';
+import 'package:sport_events/core/components/buttons/primary_button.dart';
+import 'package:sport_events/core/components/input_fields/app_password_field.dart';
+import 'package:sport_events/core/components/input_fields/app_text_field.dart';
+import 'package:sport_events/core/components/popups/error_popup.dart';
 import 'package:sport_events/user/presentation/view/sign_in/sign_in_state.dart';
 import 'package:sport_events/user/presentation/view/sign_in/sign_in_view_model.dart';
 

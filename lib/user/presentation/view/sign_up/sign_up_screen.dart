@@ -1,56 +1,27 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:sport_events/core/components/buttons/primary_button.dart';
 import 'package:sport_events/core/components/input_fields/app_password_field.dart';
 import 'package:sport_events/core/components/input_fields/app_text_field.dart';
-import 'package:sport_events/core/components/popups/error_popup.dart';
 import 'package:sport_events/user/presentation/view/components/social_buttons.dart';
-import 'package:sport_events/user/presentation/view/sign_in/sign_in_state.dart';
-import 'package:sport_events/user/presentation/view/sign_in/sign_in_view_model.dart';
 
-class SignInScreen extends ConsumerWidget {
-  const SignInScreen({
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({
     super.key,
-    required this.goToSignup,
+    required this.goToSignIn,
   });
 
-  final Function() goToSignup;
+  final void Function() goToSignIn;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
+    final confirmPasswordController = TextEditingController();
     final formKey = GlobalKey<FormState>();
 
-    final signInViewModel = ref.read(signInViewModelProvider.notifier);
-    final signInState = ref.watch(signInViewModelProvider);
-
-    void handleStateChanges() {
-      switch (signInState) {
-        case Initial():
-        case Loading():
-        case Success():
-        // TODO: Handle this case.
-        case BadCredentials():
-          displayErrorPopup(
-            context: context,
-            message: "Email ou mot de passe incorrect",
-          );
-      }
-    }
-
-    void signIn() {
-      if (formKey.currentState?.validate() == true) {
-        signInViewModel.login(
-          email: emailController.text,
-          password: passwordController.text,
-        );
-
-        handleStateChanges();
-      }
-    }
+    void signUp() {}
 
     return Center(
       child: SingleChildScrollView(
@@ -66,7 +37,7 @@ class SignInScreen extends ConsumerWidget {
                 Row(
                   children: [
                     Text(
-                      "Connexion",
+                      "Création de compte",
                       style: Theme.of(context)
                           .textTheme
                           .headlineLarge
@@ -88,42 +59,34 @@ class SignInScreen extends ConsumerWidget {
                   },
                 ),
                 const Gap(16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    AppPasswordField(
-                      controller: passwordController,
-                      label: "Mot de passe",
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Mot de passe obligatoire";
-                        }
-                        return null;
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Text(
-                          "Mot de passe oublié ?",
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+                AppPasswordField(
+                  controller: passwordController,
+                  label: "Mot de passe",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Mot de passe obligatoire";
+                    }
+                    return null;
+                  },
                 ),
                 const Gap(16),
-                SizedBox(
-                  height: 42,
-                  child: PrimaryButton(
-                    label: "Se connecter",
-                    onTap: signIn,
-                    isLoading: signInState is Loading,
-                  ),
+                AppPasswordField(
+                  controller: confirmPasswordController,
+                  label: "Confirmation du mot de passe",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Mot de passe obligatoire";
+                    } else if (confirmPasswordController.text !=
+                        passwordController.text) {
+                      return "Le mot de passe de confirmation ne correspond pas";
+                    }
+                    return null;
+                  },
+                ),
+                const Gap(16),
+                PrimaryButton(
+                  label: "Valider",
+                  onTap: signUp,
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),
@@ -145,19 +108,19 @@ class SignInScreen extends ConsumerWidget {
                   child: RichText(
                     text: TextSpan(children: [
                       TextSpan(
-                        text: "Vous n'avez pas encore de compte ? ",
+                        text: "Vous avez déjà un compte ? ",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
                       TextSpan(
-                        text: "Créer un compte",
+                        text: "Se connecter",
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w700,
                           fontSize: 15,
                         ),
-                        recognizer: TapGestureRecognizer()..onTap = goToSignup,
+                        recognizer: TapGestureRecognizer()..onTap = goToSignIn,
                       )
                     ]),
                   ),

@@ -18,8 +18,15 @@ class PrimaryButton extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       child: FilledButton(
         onPressed: isLoading ? null : onTap,
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(label),
             if (isLoading)

@@ -7,6 +7,7 @@ import 'package:sport_events/core/components/input_fields/app_password_field.dar
 import 'package:sport_events/core/components/input_fields/app_text_field.dart';
 import 'package:sport_events/core/components/popups/error_popup.dart';
 import 'package:sport_events/user/infrastructure/presentation/components/social_buttons.dart';
+import 'package:sport_events/user/infrastructure/presentation/view/profiles/profiles_screen.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/sign_up/sign_up_state.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/sign_up/sign_up_view_model.dart';
 
@@ -35,9 +36,13 @@ class SignUpScreen extends ConsumerWidget {
             context: context,
             message: "Adresse email déjà lié à un compte",
           );
+        case Success():
+          Navigator.of(context)
+              .pushReplacement(MaterialPageRoute(builder: (context) {
+            return const ProfilesScreen();
+          }));
         case Initial():
         case Loading():
-        case Success():
       }
     }
 

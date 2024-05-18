@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/auth/auth_state.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/auth/auth_view_model.dart';
+import 'package:sport_events/user/infrastructure/presentation/view/profiles/profiles_screen.dart';
 
 class SocialButtons extends ConsumerWidget {
   const SocialButtons({
@@ -15,13 +16,27 @@ class SocialButtons extends ConsumerWidget {
     final authViewModel = ref.read(authViewModelProvider.notifier);
     final authState = ref.watch(authViewModelProvider);
 
+    void handleStateChanges() {
+      switch (authState) {
+        case Success():
+          Navigator.of(context)
+              .pushReplacement(MaterialPageRoute(builder: (context) {
+            return const ProfilesScreen();
+          }));
+        case SignInWithGoogleLoading():
+        case SignInWithFacebookLoading():
+        case Initial():
+      }
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CircleAvatar(
           child: IconButton(
-            onPressed: () {
-              authViewModel.signInWithGoogle();
+            onPressed: () async {
+              await authViewModel.signInWithGoogle();
+              handleStateChanges();
             },
             icon: authState is SignInWithGoogleLoading
                 ? const CircularProgressIndicator()
@@ -31,8 +46,9 @@ class SocialButtons extends ConsumerWidget {
         const Gap(16),
         CircleAvatar(
           child: IconButton(
-            onPressed: () {
-              authViewModel.signInWithFacebook();
+            onPressed: () async {
+              await authViewModel.signInWithFacebook();
+              handleStateChanges();
             },
             icon: authState is SignInWithFacebookLoading
                 ? const CircularProgressIndicator()

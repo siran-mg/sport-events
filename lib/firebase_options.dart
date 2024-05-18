@@ -41,56 +41,51 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCOARqxHddLgkucEg_ApVPIBrK44AULhSA',
-    appId: '1:166985861887:web:92aaa3f68eceb6ca0adaca',
-    messagingSenderId: '166985861887',
-    projectId: 'sport-event-72e46',
-    authDomain: 'sport-event-72e46.firebaseapp.com',
-    storageBucket: 'sport-event-72e46.appspot.com',
-    measurementId: 'G-H7YMTTN05J',
+    apiKey: 'AIzaSyDUMy9duwZw_4yn0jRkN8WwBFW7AuO55p0',
+    appId: '1:41452549301:web:6076cb44443dbd47b57afc',
+    messagingSenderId: '41452549301',
+    projectId: 'sport-events-dc18d',
+    authDomain: 'sport-events-dc18d.firebaseapp.com',
+    storageBucket: 'sport-events-dc18d.appspot.com',
+    measurementId: 'G-ZMDBNQMHES',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCd_IoF8WLnlqBZ3G9Sem9FXQwn_QQcOjM',
-    appId: '1:166985861887:android:63cd3f21a0d0cf750adaca',
-    messagingSenderId: '166985861887',
-    projectId: 'sport-event-72e46',
-    storageBucket: 'sport-event-72e46.appspot.com',
+    apiKey: 'AIzaSyD6WyHyl5M-1bsdyaz9Pia_RC1-48KoUd8',
+    appId: '1:41452549301:android:ce6f63ebd92632dbb57afc',
+    messagingSenderId: '41452549301',
+    projectId: 'sport-events-dc18d',
+    storageBucket: 'sport-events-dc18d.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBVi6TeSlt5-igazdozl3XycxnJFpu0Jsk',
-    appId: '1:166985861887:ios:fc506f8ef6d157170adaca',
-    messagingSenderId: '166985861887',
-    projectId: 'sport-event-72e46',
-    storageBucket: 'sport-event-72e46.appspot.com',
-    androidClientId:
-        '166985861887-4546d3irragmg8mm11re5518obt30ha7.apps.googleusercontent.com',
-    iosClientId:
-        '166985861887-r2u3f9na8aj7cjfifu6pus4ccqpn8hnt.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCdhE906thrpMMi8JKy1frazDNfjy6Yr28',
+    appId: '1:41452549301:ios:8b1864f4b508340eb57afc',
+    messagingSenderId: '41452549301',
+    projectId: 'sport-events-dc18d',
+    storageBucket: 'sport-events-dc18d.appspot.com',
+    iosClientId: '41452549301-iror84a6t0n9folmhmhu5413dpni6bhe.apps.googleusercontent.com',
     iosBundleId: 'com.siran.sportEvents',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBVi6TeSlt5-igazdozl3XycxnJFpu0Jsk',
-    appId: '1:166985861887:ios:fc506f8ef6d157170adaca',
-    messagingSenderId: '166985861887',
-    projectId: 'sport-event-72e46',
-    storageBucket: 'sport-event-72e46.appspot.com',
-    androidClientId:
-        '166985861887-4546d3irragmg8mm11re5518obt30ha7.apps.googleusercontent.com',
-    iosClientId:
-        '166985861887-r2u3f9na8aj7cjfifu6pus4ccqpn8hnt.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCdhE906thrpMMi8JKy1frazDNfjy6Yr28',
+    appId: '1:41452549301:ios:8b1864f4b508340eb57afc',
+    messagingSenderId: '41452549301',
+    projectId: 'sport-events-dc18d',
+    storageBucket: 'sport-events-dc18d.appspot.com',
+    iosClientId: '41452549301-iror84a6t0n9folmhmhu5413dpni6bhe.apps.googleusercontent.com',
     iosBundleId: 'com.siran.sportEvents',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCOARqxHddLgkucEg_ApVPIBrK44AULhSA',
-    appId: '1:166985861887:web:8a2a0715fba0375e0adaca',
-    messagingSenderId: '166985861887',
-    projectId: 'sport-event-72e46',
-    authDomain: 'sport-event-72e46.firebaseapp.com',
-    storageBucket: 'sport-event-72e46.appspot.com',
-    measurementId: 'G-7EVM95ZK29',
+    apiKey: 'AIzaSyDUMy9duwZw_4yn0jRkN8WwBFW7AuO55p0',
+    appId: '1:41452549301:web:86aadfebe498ca91b57afc',
+    messagingSenderId: '41452549301',
+    projectId: 'sport-events-dc18d',
+    authDomain: 'sport-events-dc18d.firebaseapp.com',
+    storageBucket: 'sport-events-dc18d.appspot.com',
+    measurementId: 'G-DLE8PK62S7',
   );
+
 }

@@ -16,7 +16,7 @@ class AuthScreen extends ConsumerWidget {
       pageController.animateToPage(
         page,
         duration: const Duration(milliseconds: 400),
-        curve: Curves.easeIn,
+        curve: Curves.easeInOut,
       );
     }
 

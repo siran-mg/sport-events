@@ -1,137 +1,34 @@
 {
   "project_info": {
-    "project_number": "166985861887",
-    "project_id": "sport-event-72e46",
-    "storage_bucket": "sport-event-72e46.appspot.com"
+    "project_number": "41452549301",
+    "project_id": "sport-events-dc18d",
+    "storage_bucket": "sport-events-dc18d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:166985861887:android:752596e4c04036a50adaca",
-        "android_client_info": {
-          "package_name": "com.example.sport_event"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "166985861887-6t1fv8ic5ltruvsv5p8102fkji2dn0ic.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.sport_event",
-            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
-          }
-        },
-        {
-          "client_id": "166985861887-u8sqdt73t9kpp4nc5jt5ggtf66cegrk4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.sport_event",
-            "certificate_hash": "9b79b999e8fdeb3fb80175df7aa3b099e219a3f0"
-          }
-        },
-        {
-          "client_id": "166985861887-jvlt8s61ap6vr2bmc8v3e2kunoc9visu.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCd_IoF8WLnlqBZ3G9Sem9FXQwn_QQcOjM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "166985861887-jvlt8s61ap6vr2bmc8v3e2kunoc9visu.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "166985861887-oejstphk4ss4lio61tetikri1gul74e2.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.sportEvent"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:166985861887:android:63cd3f21a0d0cf750adaca",
+        "mobilesdk_app_id": "1:41452549301:android:ce6f63ebd92632dbb57afc",
         "android_client_info": {
           "package_name": "com.siran.sport_events"
         }
       },
       "oauth_client": [
         {
-          "client_id": "166985861887-jvlt8s61ap6vr2bmc8v3e2kunoc9visu.apps.googleusercontent.com",
+          "client_id": "41452549301-dp76af1qt7djkesplicgbamu6g6pvtde.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCd_IoF8WLnlqBZ3G9Sem9FXQwn_QQcOjM"
+          "current_key": "AIzaSyD6WyHyl5M-1bsdyaz9Pia_RC1-48KoUd8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "166985861887-jvlt8s61ap6vr2bmc8v3e2kunoc9visu.apps.googleusercontent.com",
+              "client_id": "41452549301-dp76af1qt7djkesplicgbamu6g6pvtde.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "166985861887-oejstphk4ss4lio61tetikri1gul74e2.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.sportEvent"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:166985861887:android:0f5fcb8e128d39ab0adaca",
-        "android_client_info": {
-          "package_name": "com.siran.sportevent"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "166985861887-4546d3irragmg8mm11re5518obt30ha7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.siran.sportevent",
-            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
-          }
-        },
-        {
-          "client_id": "166985861887-jvlt8s61ap6vr2bmc8v3e2kunoc9visu.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCd_IoF8WLnlqBZ3G9Sem9FXQwn_QQcOjM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "166985861887-jvlt8s61ap6vr2bmc8v3e2kunoc9visu.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "166985861887-oejstphk4ss4lio61tetikri1gul74e2.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.sportEvent"
-              }
             }
           ]
         }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_events/user/presentation/view/auth_screen.dart';
+import 'package:sport_events/user/presentation/view/auth/auth_screen.dart';
 
 class UserButton extends StatelessWidget {
   const UserButton({

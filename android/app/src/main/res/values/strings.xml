@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources>
+    <string name="app_name">sport_events</string>
+    <string name="facebook_app_id">3679376629058277</string>
+    <string name="fb_login_protocol_scheme">fb3679376629058277</string>
+    <string name="facebook_client_token">5db4bfcfeed990ca2d899dd8be044422</string>
+
+</resources>

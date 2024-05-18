@@ -40,7 +40,6 @@ class AuthViewModel extends _$AuthViewModel {
 
     // Once signed in, return the UserCredential
     await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-    print("ato");
     state = Success();
   }
 }

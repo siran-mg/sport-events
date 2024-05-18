@@ -5,3 +5,5 @@ class Initial extends SignUpState {}
 class Loading extends SignUpState {}
 
 class Success extends SignUpState {}
+
+class EmailAlreadyUserError extends SignUpState {}

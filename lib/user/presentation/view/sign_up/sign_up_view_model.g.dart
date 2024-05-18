@@ -6,7 +6,7 @@ part of 'sign_up_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$signUpViewModelHash() => r'3f454f5a8201a1030bf71a34cfb8290f8dde2a04';
+String _$signUpViewModelHash() => r'cf3a73a3a4086f2fd0161e1e8ad58de5ac9fa9ce';
 
 /// See also [SignUpViewModel].
 @ProviderFor(SignUpViewModel)

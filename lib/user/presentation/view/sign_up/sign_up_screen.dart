@@ -1,12 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:sport_events/core/components/buttons/primary_button.dart';
 import 'package:sport_events/core/components/input_fields/app_password_field.dart';
 import 'package:sport_events/core/components/input_fields/app_text_field.dart';
+import 'package:sport_events/core/components/popups/error_popup.dart';
 import 'package:sport_events/user/presentation/view/components/social_buttons.dart';
+import 'package:sport_events/user/presentation/view/sign_up/sign_up_state.dart';
+import 'package:sport_events/user/presentation/view/sign_up/sign_up_view_model.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends ConsumerWidget {
   const SignUpScreen({
     super.key,
     required this.goToSignIn,
@@ -15,13 +19,38 @@ class SignUpScreen extends StatelessWidget {
   final void Function() goToSignIn;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final confirmPasswordController = TextEditingController();
     final formKey = GlobalKey<FormState>();
 
-    void signUp() {}
+    final signUpViewModel = ref.read(signUpViewModelProvider.notifier);
+    final signUpState = ref.watch(signUpViewModelProvider);
+
+    handleStateChanges() {
+      switch (signUpState) {
+        case EmailAlreadyUserError():
+          displayErrorPopup(
+            context: context,
+            message: "Adresse email déjà lié à un compte",
+          );
+        case Initial():
+        case Loading():
+        case Success():
+      }
+    }
+
+    void signUp() async {
+      if (formKey.currentState?.validate() == true) {
+        await signUpViewModel.signUp(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+
+        handleStateChanges();
+      }
+    }
 
     return Center(
       child: SingleChildScrollView(
@@ -87,6 +116,7 @@ class SignUpScreen extends StatelessWidget {
                 PrimaryButton(
                   label: "Valider",
                   onTap: signUp,
+                  isLoading: signUpState is Loading,
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 16),

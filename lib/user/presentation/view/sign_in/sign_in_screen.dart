@@ -29,21 +29,21 @@ class SignInScreen extends ConsumerWidget {
 
     void handleStateChanges() {
       switch (signInState) {
-        case Initial():
-        case Loading():
-        case Success():
-        // TODO: Handle this case.
         case BadCredentials():
           displayErrorPopup(
             context: context,
             message: "Email ou mot de passe incorrect",
           );
+        case Initial():
+        case Loading():
+        case Success():
+        // TODO: Handle this case.
       }
     }
 
-    void signIn() {
+    void signIn() async {
       if (formKey.currentState?.validate() == true) {
-        signInViewModel.login(
+        await signInViewModel.login(
           email: emailController.text,
           password: passwordController.text,
         );

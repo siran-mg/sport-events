@@ -9,12 +9,14 @@ class SignInViewModel extends _$SignInViewModel {
   @override
   SignInState build() => Initial();
 
-  void login({required String email, required String password}) async {
+  login({required String email, required String password}) async {
     state = Loading();
     try {
-      final result = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      if (result.user != null) {
+      final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (result.user == null) {
         state = BadCredentials();
       } else {
         state = Success();

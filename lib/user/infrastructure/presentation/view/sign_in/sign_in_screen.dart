@@ -6,9 +6,9 @@ import 'package:sport_events/core/components/buttons/primary_button.dart';
 import 'package:sport_events/core/components/input_fields/app_password_field.dart';
 import 'package:sport_events/core/components/input_fields/app_text_field.dart';
 import 'package:sport_events/core/components/popups/error_popup.dart';
-import 'package:sport_events/user/presentation/view/components/social_buttons.dart';
-import 'package:sport_events/user/presentation/view/sign_in/sign_in_state.dart';
-import 'package:sport_events/user/presentation/view/sign_in/sign_in_view_model.dart';
+import 'package:sport_events/user/infrastructure/presentation/components/social_buttons.dart';
+import 'package:sport_events/user/infrastructure/presentation/view/sign_in/sign_in_state.dart';
+import 'package:sport_events/user/infrastructure/presentation/view/sign_in/sign_in_view_model.dart';
 
 class SignInScreen extends ConsumerWidget {
   const SignInScreen({

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
-import 'package:sport_events/user/presentation/view/auth/auth_state.dart';
-import 'package:sport_events/user/presentation/view/auth/auth_view_model.dart';
+import 'package:sport_events/user/infrastructure/presentation/view/auth/auth_state.dart';
+import 'package:sport_events/user/infrastructure/presentation/view/auth/auth_view_model.dart';
 
 class SocialButtons extends ConsumerWidget {
   const SocialButtons({

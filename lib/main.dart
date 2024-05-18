@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sport_events/core/components/buttons/app_floating_action_button.dart';
-import 'package:sport_events/core/components/buttons/user_button.dart';
 import 'package:sport_events/core/components/navigation_bars/app_bottom_navigation_bar.dart';
 import 'package:sport_events/core/theme.dart';
 import 'package:sport_events/core/typography.dart';
 import 'package:sport_events/firebase_options.dart';
+import 'package:sport_events/user/infrastructure/presentation/components/user_button.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

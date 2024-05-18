@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:sport_events/user/presentation/view/sign_in/sign_in_state.dart';
+import 'package:sport_events/user/infrastructure/presentation/view/sign_in/sign_in_state.dart';
 
 part 'sign_in_view_model.g.dart';
 

@@ -46,6 +46,8 @@ class MyApp extends StatelessWidget {
       title: 'Sport Events',
       debugShowCheckedModeBanner: false,
       theme: theme.light(),
+      darkTheme: theme.dark(),
+      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
       home: SafeArea(
         child: Scaffold(
           appBar: buildAppBar(),

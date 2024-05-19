@@ -11,7 +11,7 @@ class UserButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentUserId = ref.read(currentUserIdProvider.notifier).value;
+    final currentUserId = ref.watch(currentUserIdProvider.notifier).value;
 
     return IconButton(
         onPressed: () {

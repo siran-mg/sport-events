@@ -28,7 +28,10 @@ class ProfilesViewModel extends _$ProfilesViewModel {
 
   Future<void> logOut() async {
     await FirebaseAuth.instance.signOut();
-    await GoogleSignIn().signOut();
-    await FacebookAuth.instance.logOut();
+    if (await GoogleSignIn().isSignedIn()) {
+      await GoogleSignIn().signOut();
+    } else {
+      await FacebookAuth.instance.logOut();
+    }
   }
 }

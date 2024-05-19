@@ -19,16 +19,19 @@ class AuthViewModel extends _$AuthViewModel {
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+    if (googleAuth?.accessToken == null || googleAuth?.idToken == null) {
+      state = ClosedPopup();
+    } else {
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
 
-    // Once signed in, return the UserCredential
-    await FirebaseAuth.instance.signInWithCredential(credential);
-    await _initUser();
-    state = Success();
+      // Once signed in, return the UserCredential
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      await _initUser();
+      state = Success();
+    }
   }
 
   signInWithFacebook() async {
@@ -36,14 +39,18 @@ class AuthViewModel extends _$AuthViewModel {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
-    // Create a credential from the access token
-    final OAuthCredential facebookAuthCredential =
-        FacebookAuthProvider.credential(loginResult.accessToken!.token);
+    if (loginResult.accessToken == null) {
+      state = ClosedPopup();
+    } else {
+      // Create a credential from the access token
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
-    // Once signed in, return the UserCredential
-    await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-    await _initUser();
-    state = Success();
+      // Once signed in, return the UserCredential
+      await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+      await _initUser();
+      state = Success();
+    }
   }
 
   Future<void> _initUser() async {

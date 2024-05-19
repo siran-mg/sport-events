@@ -31,6 +31,7 @@ class SocialButtons extends ConsumerWidget {
         case SignInWithGoogleLoading():
         case SignInWithFacebookLoading():
         case Initial():
+        case ClosedPopup():
       }
     });
 

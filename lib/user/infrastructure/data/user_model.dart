@@ -1,8 +1,8 @@
-import 'dart:convert';
+import 'package:sport_events/user/domain/entity/user.dart';
 
 class UserModel {
-  final String id;
   final String authId;
+  late String id;
   final String? organizerId;
   final List<String?> teamIds;
   final List<String?> playerIds;
@@ -22,8 +22,8 @@ class UserModel {
       id: data['id'],
       authId: data['authId'],
       organizerId: data['organizerId'],
-      teamIds: json.decode(data['teamIds']).toList(),
-      playerIds: json.decode(data['playerIds']).toList(),
+      teamIds: List<String>.from(data['teamIds']),
+      playerIds: List<String>.from(data['playerIds']),
       supporterId: data['supporterId'],
     );
   }
@@ -46,4 +46,15 @@ class UserModel {
   bool hasPlayerProfile() => playerIds.isNotEmpty;
 
   bool isSupporter() => supporterId != null;
+
+  static UserModel fromDomain(User user) {
+    return UserModel(
+      id: user.id,
+      authId: user.authId,
+      organizerId: user.organizer?.id,
+      teamIds: user.teams.map((e) => e?.id).toList(),
+      playerIds: user.players.map((e) => e?.id).toList(),
+      supporterId: user.supporter?.id,
+    );
+  }
 }

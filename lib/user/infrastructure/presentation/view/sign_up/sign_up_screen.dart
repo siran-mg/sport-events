@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +7,6 @@ import 'package:sport_events/core/components/buttons/primary_button.dart';
 import 'package:sport_events/core/components/input_fields/app_password_field.dart';
 import 'package:sport_events/core/components/input_fields/app_text_field.dart';
 import 'package:sport_events/core/components/popups/error_popup.dart';
-import 'package:sport_events/user/infrastructure/di/riverpod.dart';
 import 'package:sport_events/user/infrastructure/presentation/components/social_buttons.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/profiles/profiles_screen.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/sign_up/sign_up_state.dart';
@@ -29,27 +29,28 @@ class SignUpScreen extends ConsumerWidget {
 
     final signUpViewModel = ref.read(signUpViewModelProvider.notifier);
     final signUpState = ref.watch(signUpViewModelProvider);
-    final currentUserId = ref.watch(currentUserIdProvider);
 
-    handleStateChanges() {
-      switch (signUpState) {
+    ref.listen(signUpViewModelProvider, (previous, next) {
+      switch (next) {
         case EmailAlreadyUserError():
           displayErrorPopup(
             context: context,
             message: "Adresse email déjà lié à un compte",
           );
+          break;
         case Success():
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => ProfilesScreen(
-                userId: currentUserId!,
+                userId: FirebaseAuth.instance.currentUser!.uid,
               ),
             ),
           );
+          break;
         case Initial():
         case Loading():
       }
-    }
+    });
 
     void signUp() async {
       if (formKey.currentState?.validate() == true) {
@@ -57,8 +58,6 @@ class SignUpScreen extends ConsumerWidget {
           email: emailController.text,
           password: passwordController.text,
         );
-
-        handleStateChanges();
       }
     }
 

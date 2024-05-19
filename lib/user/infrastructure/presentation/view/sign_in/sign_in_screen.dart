@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +7,6 @@ import 'package:sport_events/core/components/buttons/primary_button.dart';
 import 'package:sport_events/core/components/input_fields/app_password_field.dart';
 import 'package:sport_events/core/components/input_fields/app_text_field.dart';
 import 'package:sport_events/core/components/popups/error_popup.dart';
-import 'package:sport_events/user/infrastructure/di/riverpod.dart';
 import 'package:sport_events/user/infrastructure/presentation/components/social_buttons.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/profiles/profiles_screen.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/sign_in/sign_in_state.dart';
@@ -28,10 +28,9 @@ class SignInScreen extends ConsumerWidget {
 
     final signInViewModel = ref.read(signInViewModelProvider.notifier);
     final signInState = ref.watch(signInViewModelProvider);
-    final currentUserId = ref.watch(currentUserIdProvider);
 
-    void handleStateChanges() {
-      switch (signInState) {
+    ref.listen(signInViewModelProvider, (previous, next) {
+      switch (next) {
         case BadCredentials():
           displayErrorPopup(
             context: context,
@@ -41,14 +40,14 @@ class SignInScreen extends ConsumerWidget {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => ProfilesScreen(
-                userId: currentUserId!,
+                userId: FirebaseAuth.instance.currentUser!.uid,
               ),
             ),
           );
         case Initial():
         case Loading():
       }
-    }
+    });
 
     void signIn() async {
       if (formKey.currentState?.validate() == true) {
@@ -56,8 +55,6 @@ class SignInScreen extends ConsumerWidget {
           email: emailController.text,
           password: passwordController.text,
         );
-
-        handleStateChanges();
       }
     }
 

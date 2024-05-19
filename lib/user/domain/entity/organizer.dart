@@ -1,11 +1,9 @@
-import 'package:uuid/uuid.dart';
-
 class Organizer {
-  late String? id = const Uuid().v4();
+  late String id;
   final String? name;
 
   Organizer({
-    this.id,
+    required this.id,
     this.name,
   });
 }

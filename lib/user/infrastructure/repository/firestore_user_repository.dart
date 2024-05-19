@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sport_events/core/firestore/collections.dart';
-import 'package:sport_events/user/domain/entity/organizer.dart';
 import 'package:sport_events/user/domain/entity/player.dart';
-import 'package:sport_events/user/domain/entity/supporter.dart';
 import 'package:sport_events/user/domain/entity/team.dart';
 import 'package:sport_events/user/domain/entity/user.dart';
 import 'package:sport_events/user/domain/repository/organizer_repository.dart';
@@ -42,18 +40,18 @@ class FirestoreUserRepository extends UserRepository {
       return null;
     }
     final organizerFuture = userModel.isOrganizer()
-        ? Future.value()
-        : organizationRepository.getById(userModel.organizerId!);
+        ? organizationRepository.getById(userModel.organizerId!)
+        : Future.value();
     final teamsFuture = userModel.hasTeam()
-        ? Future.value(<Team>[])
-        : teamRepository.getTeams(userModel.teamIds.map((e) => e!).toList());
+        ? teamRepository.getTeams(userModel.teamIds.map((e) => e!).toList())
+        : Future.value(<Team>[]);
     final playersFuture = userModel.hasPlayerProfile()
-        ? Future.value(<Player>[])
-        : playerRepository
-            .getPlayers(userModel.playerIds.map((e) => e!).toList());
+        ? playerRepository
+            .getPlayers(userModel.playerIds.map((e) => e!).toList())
+        : Future.value(<Player>[]);
     final supporterFuture = userModel.isSupporter()
-        ? Future.value(<Supporter>[])
-        : supporterRepository.getById(userModel.supporterId!);
+        ? supporterRepository.getById(userModel.supporterId!)
+        : Future.value();
 
     final [organizer, teams, players, supporter] = await Future.wait([
       organizerFuture,
@@ -62,11 +60,26 @@ class FirestoreUserRepository extends UserRepository {
       supporterFuture,
     ]);
     return User(
+      id: userModel.id,
       authId: authId,
       teams: teams as List<Team>,
       players: players as List<Player>,
-      supporter: supporter as Supporter,
-      organizer: organizer as Organizer,
+      supporter: supporter,
+      organizer: organizer,
     );
+  }
+
+  @override
+  Future<void> createUser(User user) {
+    return _userCollection.add(UserModel.fromDomain(user));
+  }
+
+  @override
+  Future<bool> isUserExist(String authId) {
+    return _userCollection
+        .where("authId", isEqualTo: authId)
+        .limit(1)
+        .get()
+        .then((value) => value.docs.isNotEmpty);
   }
 }

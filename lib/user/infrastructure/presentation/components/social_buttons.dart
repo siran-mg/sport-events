@@ -16,23 +16,23 @@ class SocialButtons extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authViewModel = ref.read(authViewModelProvider.notifier);
     final authState = ref.watch(authViewModelProvider);
-    final currentUserId = ref.watch(currentUserIdProvider);
 
-    void handleStateChanges() {
-      switch (authState) {
+    ref.listen(authViewModelProvider, (previous, next) {
+      switch (next) {
         case Success():
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => ProfilesScreen(
-                userId: currentUserId!,
+                userId: ref.read(currentUserIdProvider.notifier).value!,
               ),
             ),
           );
+          break;
         case SignInWithGoogleLoading():
         case SignInWithFacebookLoading():
         case Initial():
       }
-    }
+    });
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +41,6 @@ class SocialButtons extends ConsumerWidget {
           child: IconButton(
             onPressed: () async {
               await authViewModel.signInWithGoogle();
-              handleStateChanges();
             },
             icon: authState is SignInWithGoogleLoading
                 ? const CircularProgressIndicator()
@@ -53,7 +52,6 @@ class SocialButtons extends ConsumerWidget {
           child: IconButton(
             onPressed: () async {
               await authViewModel.signInWithFacebook();
-              handleStateChanges();
             },
             icon: authState is SignInWithFacebookLoading
                 ? const CircularProgressIndicator()

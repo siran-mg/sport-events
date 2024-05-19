@@ -2,11 +2,11 @@ import 'package:sport_events/user/domain/entity/supporter.dart';
 import 'package:sport_events/user/infrastructure/data/person_name_model.dart';
 
 class SupporterModel {
-  final String? id;
+  final String id;
   final PersonNameModel? name;
 
   SupporterModel({
-    this.id,
+    required this.id,
     this.name,
   });
 

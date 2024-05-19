@@ -6,6 +6,7 @@ import 'package:sport_events/user/domain/repository/supporter_repository.dart';
 import 'package:sport_events/user/domain/repository/team_repository.dart';
 import 'package:sport_events/user/domain/repository/user_repository.dart';
 import 'package:sport_events/user/domain/use_case/get_user_profiles.dart';
+import 'package:sport_events/user/domain/use_case/init_user.dart';
 import 'package:sport_events/user/infrastructure/repository/firestore_organizer_repository.dart';
 import 'package:sport_events/user/infrastructure/repository/firestore_player_repository.dart';
 import 'package:sport_events/user/infrastructure/repository/firestore_supporter_repository.dart';
@@ -50,6 +51,18 @@ GetUserProfiles getUserProfiles(GetUserProfilesRef ref) {
 }
 
 @riverpod
-String? currentUserId(CurrentUserIdRef ref) {
-  return FirebaseAuth.instance.currentUser?.uid;
+class CurrentUserId extends _$CurrentUserId {
+  var value = FirebaseAuth.instance.currentUser?.uid;
+
+  @override
+  void build() {
+    FirebaseAuth.instance.authStateChanges().listen((event) {
+      value = event?.uid;
+    });
+  }
+}
+
+@riverpod
+InitUser initUser(InitUserRef ref) {
+  return InitUser(userRepository: ref.read(userRepositoryProvider));
 }

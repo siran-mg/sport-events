@@ -100,12 +100,27 @@ final getUserProfilesProvider = AutoDisposeProvider<GetUserProfiles>.internal(
 );
 
 typedef GetUserProfilesRef = AutoDisposeProviderRef<GetUserProfiles>;
-String _$currentUserIdHash() => r'b575e143ac1ee8cf8f1271405e64bea0eb69034e';
+String _$initUserHash() => r'd924dd356beae3e7ef50e674167ebdecab4f5b6d';
 
-/// See also [currentUserId].
-@ProviderFor(currentUserId)
-final currentUserIdProvider = AutoDisposeProvider<String?>.internal(
-  currentUserId,
+/// See also [initUser].
+@ProviderFor(initUser)
+final initUserProvider = AutoDisposeProvider<InitUser>.internal(
+  initUser,
+  name: r'initUserProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$initUserHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef InitUserRef = AutoDisposeProviderRef<InitUser>;
+String _$currentUserIdHash() => r'a4eb7e45ad6dc5ccc27f77763da01612f314ed08';
+
+/// See also [CurrentUserId].
+@ProviderFor(CurrentUserId)
+final currentUserIdProvider =
+    AutoDisposeNotifierProvider<CurrentUserId, void>.internal(
+  CurrentUserId.new,
   name: r'currentUserIdProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
@@ -114,6 +129,6 @@ final currentUserIdProvider = AutoDisposeProvider<String?>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef CurrentUserIdRef = AutoDisposeProviderRef<String?>;
+typedef _$CurrentUserId = AutoDisposeNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -4,12 +4,12 @@ import 'package:sport_events/user/domain/entity/team.dart';
 import 'package:sport_events/user/infrastructure/data/team_name_model.dart';
 
 class TeamModel {
-  final String? id;
+  final String id;
   final TeamNameModel? name;
   final List<String?>? playerIds;
 
   TeamModel({
-    this.id,
+    required this.id,
     this.name,
     this.playerIds,
   });

@@ -3,5 +3,9 @@ class TeamName {
   final String? fullName;
   final String? abbreviation;
 
-  TeamName(this.shortName, this.fullName, this.abbreviation);
+  TeamName({
+    this.shortName,
+    this.fullName,
+    this.abbreviation,
+  });
 }

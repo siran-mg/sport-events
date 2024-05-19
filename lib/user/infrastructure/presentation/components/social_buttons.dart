@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:sport_events/user/infrastructure/di/riverpod.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/auth/auth_state.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/auth/auth_view_model.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/profiles/profiles_screen.dart';
@@ -15,14 +16,18 @@ class SocialButtons extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authViewModel = ref.read(authViewModelProvider.notifier);
     final authState = ref.watch(authViewModelProvider);
+    final currentUserId = ref.watch(currentUserIdProvider);
 
     void handleStateChanges() {
       switch (authState) {
         case Success():
-          Navigator.of(context)
-              .pushReplacement(MaterialPageRoute(builder: (context) {
-            return const ProfilesScreen();
-          }));
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => ProfilesScreen(
+                userId: currentUserId!,
+              ),
+            ),
+          );
         case SignInWithGoogleLoading():
         case SignInWithFacebookLoading():
         case Initial():

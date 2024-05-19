@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class UserModel {
+  final String id;
   final String authId;
   final String? organizerId;
   final List<String?> teamIds;
@@ -9,6 +10,7 @@ class UserModel {
 
   UserModel({
     required this.authId,
+    required this.id,
     this.organizerId,
     this.teamIds = const [],
     this.playerIds = const [],
@@ -17,6 +19,7 @@ class UserModel {
 
   static UserModel fromJson(Map<String, dynamic> data) {
     return UserModel(
+      id: data['id'],
       authId: data['authId'],
       organizerId: data['organizerId'],
       teamIds: json.decode(data['teamIds']).toList(),
@@ -27,6 +30,7 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['id'] = id;
     map['authId'] = authId;
     map['organizerId'] = organizerId;
     map['teamIds'] = teamIds;

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sport_events/core/firestore/collections.dart';
+import 'package:sport_events/user/domain/entity/organizer.dart';
 import 'package:sport_events/user/domain/entity/player.dart';
 import 'package:sport_events/user/domain/entity/supporter.dart';
 import 'package:sport_events/user/domain/entity/team.dart';
@@ -24,16 +25,18 @@ class FirestoreUserRepository extends UserRepository {
   final PlayerRepository playerRepository;
   final SupporterRepository supporterRepository;
 
+  final _userCollection = FirebaseFirestore.instance
+      .collection(FirestoreCollection.users.name)
+      .withConverter(
+        fromFirestore: (snapshot, _) => UserModel.fromJson(snapshot.data()!),
+        toFirestore: (model, _) => model.toJson(),
+      );
+
   @override
   Future<User?> getUserByAuthId(String authId) async {
-    final userQuerySnapshot = await FirebaseFirestore.instance
-        .collection(FirestoreCollection.user.value)
-        .where("authId", isEqualTo: authId)
-        .withConverter(
-          fromFirestore: (snapshot, _) => UserModel.fromJson(snapshot.data()!),
-          toFirestore: (model, _) => model.toJson(),
-        )
-        .get();
+    final userQuerySnapshot =
+        await _userCollection.where("authId", isEqualTo: authId).get();
+
     final userModel = userQuerySnapshot.docs.firstOrNull?.data();
     if (userModel == null) {
       return null;
@@ -60,10 +63,10 @@ class FirestoreUserRepository extends UserRepository {
     ]);
     return User(
       authId: authId,
-      teams: teams,
-      players: players,
-      supporter: supporter,
-      organizer: organizer,
+      teams: teams as List<Team>,
+      players: players as List<Player>,
+      supporter: supporter as Supporter,
+      organizer: organizer as Organizer,
     );
   }
 }

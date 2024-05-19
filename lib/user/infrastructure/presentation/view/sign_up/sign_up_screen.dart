@@ -6,6 +6,7 @@ import 'package:sport_events/core/components/buttons/primary_button.dart';
 import 'package:sport_events/core/components/input_fields/app_password_field.dart';
 import 'package:sport_events/core/components/input_fields/app_text_field.dart';
 import 'package:sport_events/core/components/popups/error_popup.dart';
+import 'package:sport_events/user/infrastructure/di/riverpod.dart';
 import 'package:sport_events/user/infrastructure/presentation/components/social_buttons.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/profiles/profiles_screen.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/sign_up/sign_up_state.dart';
@@ -28,6 +29,7 @@ class SignUpScreen extends ConsumerWidget {
 
     final signUpViewModel = ref.read(signUpViewModelProvider.notifier);
     final signUpState = ref.watch(signUpViewModelProvider);
+    final currentUserId = ref.watch(currentUserIdProvider);
 
     handleStateChanges() {
       switch (signUpState) {
@@ -37,10 +39,13 @@ class SignUpScreen extends ConsumerWidget {
             message: "Adresse email déjà lié à un compte",
           );
         case Success():
-          Navigator.of(context)
-              .pushReplacement(MaterialPageRoute(builder: (context) {
-            return const ProfilesScreen();
-          }));
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => ProfilesScreen(
+                userId: currentUserId!,
+              ),
+            ),
+          );
         case Initial():
         case Loading():
       }

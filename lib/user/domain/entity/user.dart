@@ -19,4 +19,10 @@ class User {
     this.players = const [],
     this.supporter,
   });
+
+  bool hasAccount() =>
+      organizer != null ||
+      supporter != null ||
+      teams.isNotEmpty ||
+      players.isNotEmpty;
 }

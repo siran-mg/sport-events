@@ -4,6 +4,7 @@ import 'package:sport_events/core/components/buttons/primary_button.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/auth/auth_screen.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/profiles/profiles_state.dart';
 import 'package:sport_events/user/infrastructure/presentation/view/profiles/profiles_view_model.dart';
+import 'package:sport_events/user/infrastructure/presentation/view/welcome/welcome_screen.dart';
 
 class ProfilesScreen extends ConsumerStatefulWidget {
   const ProfilesScreen({
@@ -30,38 +31,41 @@ class ProfilesScreenState extends ConsumerState<ProfilesScreen> {
     final profilesState = ref.watch(profilesViewModelProvider);
 
     return SafeArea(
-      child: Scaffold(
-        body: Builder(
-          builder: (context) {
-            switch (profilesState) {
-              case Loading():
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              case UserProfilesNotFound():
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Profile introuvable"),
-                      PrimaryButton(
-                        label: "Se déconnecter",
-                        onTap: () {
-                          ref
-                              .read(profilesViewModelProvider.notifier)
-                              .logOut()
-                              .then((_) =>
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (context) => const AuthScreen(),
-                                    ),
-                                  ));
-                        },
-                      )
-                    ],
-                  ),
-                );
-              case Success(user: final user):
+      child: Builder(
+        builder: (context) {
+          switch (profilesState) {
+            case Loading():
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            case UserProfilesNotFound():
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Profile introuvable"),
+                    PrimaryButton(
+                      label: "Se déconnecter",
+                      onTap: () {
+                        ref
+                            .read(profilesViewModelProvider.notifier)
+                            .logOut()
+                            .then(
+                              (_) => Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => const AuthScreen(),
+                                ),
+                              ),
+                            );
+                      },
+                    )
+                  ],
+                ),
+              );
+            case Success(user: final user):
+              if (!user.hasAccount()) {
+                return const WelcomeScreen();
+              } else {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -73,18 +77,20 @@ class ProfilesScreenState extends ConsumerState<ProfilesScreen> {
                         ref
                             .read(profilesViewModelProvider.notifier)
                             .logOut()
-                            .then((_) => Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) => const AuthScreen(),
-                                  ),
-                                ));
+                            .then(
+                              (_) => Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => const AuthScreen(),
+                                ),
+                              ),
+                            );
                       },
                     )
                   ],
                 );
-            }
-          },
-        ),
+              }
+          }
+        },
       ),
     );
   }
